@@ -2,9 +2,8 @@ package za.ac.cput.domain;
 
 import com.sun.istack.NotNull;
 import lombok.*;
-
 import javax.persistence.Entity;
-import jaxax.persistence.Id;
+import javax.persistence.Id;
 import javax.persistence.Table;
 /*
    CleaningStaff.java
@@ -16,21 +15,20 @@ import javax.persistence.Table;
 @Getter
 @ToString
 @Builder
-@NoArgConstructor
-@Table(name ("tbl_cleaning_staff")
+@NoArgsConstructor
+@Table(name = "tbl_cleaning_staff")
+public class CleaningStaff {
 
-        public class CleaningStaff{
-        @Id
-        private String employeeId
+    @Id
+    private String employeeId;
 
-        @NotNull
-        private String employeeFirstName;
-        private String employeeLastName;
+    @NotNull
+    private String employeeFirstName;
+    private String employeeLastName;
 
-        public CleaningStaff(String employeeId, String empoyeeFirstName, StringemployeeLastName){
-        this.emplyeeId = emplyeeId;
+    public CleaningStaff(String employeeId, String employeeFirstName, String employeeLastName) {
+        this.employeeId = employeeId;
         this.employeeFirstName = employeeFirstName;
-        this.employeeLastName = employeeLastname;
-
+        this.employeeLastName = employeeLastName;
     }
 }
