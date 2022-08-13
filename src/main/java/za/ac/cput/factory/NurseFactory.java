@@ -17,6 +17,6 @@ public class NurseFactory {
 
         if (StringHelper.isEmptyOrNull(id) || StringHelper.isEmptyOrNull(nurseFirstName) || StringHelper.isEmptyOrNull(nurseLastName))
             throw new IllegalArgumentException();
-        return new Nurse.Builder().nurseID(nurseID).nurseFirstName(nurseFirstName).nurseLastName(nurseFirstName).build();
+        return new Nurse.Builder().nurseID(id).nurseFirstName(nurseFirstName).nurseLastName(nurseFirstName).build();
     }
 }
