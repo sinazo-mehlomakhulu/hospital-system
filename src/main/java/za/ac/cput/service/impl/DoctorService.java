@@ -12,6 +12,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//Sinenhlanhla Zondi
+
 @Service
 @Transactional
 public class DoctorService {
