@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+//Sinenhlanhla Zondi
+
 @Entity
 @Getter
 @Setter
@@ -17,10 +19,13 @@ import javax.persistence.Table;
 public class Secretary {
 
     @Id
+    @NotNull
     private String secID;
 
     @NotNull
     private String secFirstName;
+
+    @NotNull
     private String secLastName;
 
     public Secretary(String secID, String secFirstName, String secLastName) {
