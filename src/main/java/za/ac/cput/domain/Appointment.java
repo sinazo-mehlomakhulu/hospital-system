@@ -30,7 +30,7 @@ public class Appointment {
     private String appointmentDuration;
     private String appointmentTime;
 
-    public Appointment(String appointId, String appointmentDate,String appointmentDuration, String appointmentTime) {
+    public Appointment(String appointmentId, String appointmentDate,String appointmentDuration, String appointmentTime) {
         this.appointmentId = appointmentId;
         this.appointmentDate = appointmentDate;
         this.appointmentDuration = appointmentDuration;
