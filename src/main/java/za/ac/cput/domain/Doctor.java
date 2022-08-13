@@ -19,10 +19,13 @@ import javax.persistence.Table;
 public class Doctor {
 
     @Id
+    @NotNull
     private String docID;
 
     @NotNull
     private String firstName;
+
+    @NotNull
     private String lastName;
 
     private String cellNum;

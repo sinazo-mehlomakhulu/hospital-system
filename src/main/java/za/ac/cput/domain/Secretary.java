@@ -19,10 +19,13 @@ import javax.persistence.Table;
 public class Secretary {
 
     @Id
+    @NotNull
     private String secID;
 
     @NotNull
     private String secFirstName;
+
+    @NotNull
     private String secLastName;
 
     public Secretary(String secID, String secFirstName, String secLastName) {
