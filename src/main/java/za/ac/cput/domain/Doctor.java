@@ -1,5 +1,7 @@
 package za.ac.cput.domain;
 
+//Sinenhlanhla Zondi
+
 import com.sun.istack.NotNull;
 import lombok.*;
 
