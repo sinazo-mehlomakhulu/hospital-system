@@ -1,10 +1,9 @@
 package za.ac.cput.domain;
 
-import com.sun.istack.NotNull;
 import lombok.*;
-
 import javax.persistence.Entity;
-import jaxax.persistence.Id;
+
+import javax.persistence.Id;
 import javax.persistence.Table;
 /*
    Appointment.java
@@ -17,21 +16,19 @@ import javax.persistence.Table;
 @Getter
 @ToString
 @Builder
-@NoArgConstructor
+@NoArgsConstructor
 @Table(name = "tbl_appointment")
-
 public class Appointment {
+
     @Id
     private String AppointmentId;
-
-    @NotNull
 
     private String appointmentDate;
     private String appointmentDuration;
     private String appointmentTime;
 
-    public Appointment(String appointmentId, String appointmentDate,String appointmentDuration, String appointmentTime) {
-        this.appointmentId = appointmentId;
+    public Appointment(String appointmentId, String appointmentDate, String appointmentDuration, String appointmentTime) {
+        AppointmentId = appointmentId;
         this.appointmentDate = appointmentDate;
         this.appointmentDuration = appointmentDuration;
         this.appointmentTime = appointmentTime;
