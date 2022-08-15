@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
     Author: Fayaad Abrahams (218221630)
     Date: 12 August 2022
 */
-@Service
 public class NurseServiceImpl implements NurseService {
     private final NurseRepository repository;
 

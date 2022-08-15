@@ -2,6 +2,7 @@ package za.ac.cput.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import za.ac.cput.domain.HospitalRoom;
 import za.ac.cput.repository.HospitalRoomRepository;
 import za.ac.cput.service.HospitalRoomService;
@@ -19,11 +20,6 @@ import java.util.stream.Collectors;
 public class HospitalRoomServiceImpl implements HospitalRoomService {
 
     private final HospitalRoomRepository repository;
-
-    @Autowired
-    public HospitalRoomServiceImpl(HospitalRoomRepository repository) {
-        this.repository = repository;
-    }
 
     @Override
     public HospitalRoom save(HospitalRoom hospitalRoom) {
