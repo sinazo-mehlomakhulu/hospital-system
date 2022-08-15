@@ -1,13 +1,14 @@
 package za.ac.cput.domain;
 
 import com.sun.istack.NotNull;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
+
 /*
     Invoice.java
     Entity for the Invoice
@@ -17,23 +18,81 @@ import javax.persistence.Table;
 @Entity
 @Getter
 @ToString
-@Builder
 @NoArgsConstructor
 @Table(name = "tbl_invoice")
+
 public class Invoice {
 
-        @Id
-        private Integer invoiceNum;
 
-        @NotNull
+    @Id
+    private String invoiceNum;
+
+    @NotNull
+    private Double invoiceAmount;
+    private String invoiceType;
+    private String invoiceDate;
+
+    public Invoice(Builder builder) {
+        this.invoiceNum = builder.invoiceNum;
+        this.invoiceType = builder.invoiceType;
+        this.invoiceAmount = builder.invoiceAmount;
+        this.invoiceDate = builder.invoiceDate;
+
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Invoice that = (Invoice) o;
+        return invoiceNum == that.invoiceNum && invoiceType.equals(that.invoiceType) && invoiceAmount.equals(that.invoiceAmount) && invoiceDate.equals(that.invoiceDate);
+    }
+
+    @Override
+
+    public int hashCode() {
+        return Objects.hash(invoiceNum, invoiceAmount, invoiceType, invoiceDate);
+    }
+
+    public static class Builder {
+        private String invoiceNum;
         private Double invoiceAmount;
         private String invoiceType;
+
         private String invoiceDate;
 
-    private Invoice (Integer invoiceNum, Double invoiceAmount, String invoiceType, String invoiceDate) {
+
+        public Builder invoiceNum(String invoiceNum) {
             this.invoiceNum = invoiceNum;
-            this.invoiceAmount = invoiceAmount;
-            this.invoiceType = invoiceType;
-            this.invoiceDate = invoiceDate;
+            return this;
         }
+
+        public Builder invoiceAmount(Double invoiceAmount) {
+            this.invoiceAmount = invoiceAmount;
+            return this;
+        }
+
+        public Builder invoiceType(String invoiceType) {
+            this.invoiceType = invoiceType;
+            return this;
+        }
+
+        public Builder invoiceDate(String invoiceDate) {
+            this.invoiceDate = invoiceDate;
+            return this;
+        }
+
+        public Builder copy(Invoice invoice) {
+            this.invoiceNum = invoice.invoiceNum;
+            this.invoiceAmount = invoice.invoiceAmount;
+            this.invoiceType = invoice.invoiceType;
+            this.invoiceDate = invoice.invoiceDate;
+            return this;
+        }
+        public Invoice build() {
+            return new Invoice(this);
+
+        }
+    }
     }
