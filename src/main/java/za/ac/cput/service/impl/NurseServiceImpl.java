@@ -6,6 +6,7 @@ import za.ac.cput.domain.Nurse;
 import za.ac.cput.repository.NurseRepository;
 import za.ac.cput.service.NurseService;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,8 +31,8 @@ public class NurseServiceImpl implements NurseService {
     }
 
     @Override
-    public Nurse read(String id) {
-        return this.repository.findById(id).orElse(null);
+    public Optional<Nurse> read(String id) {
+        return this.repository.findById(id);
     }
 
     @Override

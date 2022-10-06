@@ -6,6 +6,7 @@ import za.ac.cput.domain.HospitalRoom;
 import za.ac.cput.repository.HospitalRoomRepository;
 import za.ac.cput.service.HospitalRoomService;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -27,12 +28,12 @@ public class HospitalRoomServiceImpl implements HospitalRoomService {
 
     @Override
     public HospitalRoom save(HospitalRoom hospitalRoom) {
-        return this.repository.save(hospitalRoom);
+       return this.repository.save(hospitalRoom);
     }
 
     @Override
-    public HospitalRoom read(String id) {
-        return this.repository.findById(id).orElse(null);
+    public Optional<HospitalRoom> read(String id) {
+        return this.repository.findById(id);
     }
 
     @Override

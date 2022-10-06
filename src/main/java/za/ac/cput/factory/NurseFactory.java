@@ -11,12 +11,10 @@ import za.ac.cput.util.StringHelper;
 */
 public class NurseFactory {
     public static Nurse createNurse(String nurseID, String nurseFirstName, String nurseLastName) {
-        String id = StringHelper.generateUnqiueID();
+        StringHelper.checkStringParam("nurseID", nurseID);
         StringHelper.checkStringParam("nurseFirstName", nurseFirstName);
         StringHelper.checkStringParam("nurseLastName", nurseLastName);
 
-        if (StringHelper.isEmptyOrNull(id) || StringHelper.isEmptyOrNull(nurseFirstName) || StringHelper.isEmptyOrNull(nurseLastName))
-            throw new IllegalArgumentException();
-        return new Nurse.Builder().nurseID(id).nurseFirstName(nurseFirstName).nurseLastName(nurseFirstName).build();
+        return new Nurse.Builder().nurseID(nurseID).nurseFirstName(nurseFirstName).nurseLastName(nurseFirstName).build();
     }
 }

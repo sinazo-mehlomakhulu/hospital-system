@@ -5,8 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import za.ac.cput.domain.HospitalRoom;
 import za.ac.cput.domain.Nurse;
 import za.ac.cput.factory.NurseFactory;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -44,8 +47,8 @@ public class NurseServiceImplTest {
 
     @Test
     void b_read() {
-        Nurse read = service.read(nurse1.getNurseID());
-        assertEquals(read.getNurseID(), nurse1.getNurseID());
+        Optional<Nurse> read = service.read(nurse1.getNurseID());
+        assertAll(() -> assertTrue(read.isPresent()), () -> assertEquals(nurse1, read.get()));
         System.out.println("Read: " + read);
     }
 

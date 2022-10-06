@@ -60,6 +60,7 @@ public class HospitalRoom implements Serializable {
         return Objects.hash(roomID, roomFloor);
     }
 
+
     public static class Builder {
         private String roomID;
         private int roomFloor;

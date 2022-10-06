@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.HospitalRoom;
 import za.ac.cput.factory.HospitalRoomFactory;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /*
@@ -16,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
         Author: Fayaad Abrahams (218221630)
         Date: 12 August 2022
     */
-@SpringBootTest
 @TestMethodOrder(MethodOrderer.MethodName.class)
+@SpringBootTest
 public class HospitalRoomServiceImplTest {
     private static final HospitalRoom hospitalRoom1 = HospitalRoomFactory.createHospitalRoom("1919319", 2);
     private static final HospitalRoom hospitalRoom2 = HospitalRoomFactory.createHospitalRoom("", 12);
@@ -43,8 +45,8 @@ public class HospitalRoomServiceImplTest {
 
     @Test
     public void b_read() {
-        HospitalRoom read = service.read(hospitalRoom1.getRoomID());
-        assertEquals(read.getRoomID(), hospitalRoom1.getRoomID());
+        Optional<HospitalRoom> read = service.read(hospitalRoom1.getRoomID());
+        assertAll(() -> assertTrue(read.isPresent()), () -> assertEquals(hospitalRoom1, read.get()));
         System.out.println("Read: " + read);
     }
 
