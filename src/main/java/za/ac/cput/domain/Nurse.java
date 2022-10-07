@@ -1,11 +1,11 @@
 package za.ac.cput.domain;
 
 import com.sun.istack.NotNull;
-import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Objects;
 
 /*
@@ -15,11 +15,8 @@ import java.util.Objects;
     Date: 3 August 2022
 */
 @Entity
-@Getter
-@ToString
-@NoArgsConstructor
 @Table(name = "tbl_nurse")
-public class Nurse {
+public class Nurse implements Serializable {
 
     @Id
     private String nurseID;
@@ -31,6 +28,26 @@ public class Nurse {
         this.nurseID = builder.nurseID;
         this.nurseFirstName = builder.nurseFirstName;
         this.nurseLastName = builder.nurseLastName;
+    }
+
+    public Nurse() {
+    }
+
+    public String getNurseID() {
+        return nurseID;
+    }
+
+    public String getNurseFirstName() {
+        return nurseFirstName;
+    }
+
+    public String getNurseLastName() {
+        return nurseLastName;
+    }
+
+    @Override
+    public String toString() {
+        return "Nurse{" + "nurseID='" + nurseID + '\'' + ", nurseFirstName='" + nurseFirstName + '\'' + ", nurseLastName='" + nurseLastName + '\'' + '}';
     }
 
     @Override

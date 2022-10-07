@@ -1,23 +1,27 @@
 package za.ac.cput.service.impl;
 
-import org.junit.Test;
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import za.ac.cput.domain.HospitalRoom;
 import za.ac.cput.domain.Nurse;
 import za.ac.cput.factory.NurseFactory;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
+
 /*
-    NurseServiceImplTest.java
-    Testing Service Implementation for the Nurses
-    Author: Fayaad Abrahams (218221630)
-    Date: 12 August 2022
-*/
+        NurseServiceImplTest.java
+        Testing Service Implementation for the Nurses
+        Author: Fayaad Abrahams (218221630)
+        Date: 12 August 2022
+    */
 @TestMethodOrder(MethodOrderer.MethodName.class)
 @SpringBootTest
-class NurseServiceImplTest {
+public class NurseServiceImplTest {
     private static final Nurse nurse1 = NurseFactory.createNurse("01093298", "Janice", "Flopper");
     private static final Nurse nurse2 = NurseFactory.createNurse("23490234", "Antonio", "Degracias");
     private static final Nurse nurse3 = NurseFactory.createNurse("75892745", "Flounder", "Weathers");
@@ -43,8 +47,8 @@ class NurseServiceImplTest {
 
     @Test
     void b_read() {
-        Nurse read = service.read(nurse1.getNurseID());
-        assertEquals(read.getNurseID(), nurse1.getNurseID());
+        Optional<Nurse> read = service.read(nurse1.getNurseID());
+        assertAll(() -> assertTrue(read.isPresent()), () -> assertEquals(nurse1, read.get()));
         System.out.println("Read: " + read);
     }
 
@@ -60,6 +64,4 @@ class NurseServiceImplTest {
         System.out.println("Get All");
         System.out.println(service.getAll());
     }
-
-
 }

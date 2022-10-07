@@ -2,6 +2,7 @@ package za.ac.cput.factory;
 
 import za.ac.cput.domain.HospitalRoom;
 import za.ac.cput.util.StringHelper;
+
 /*
     HospitalRoomFactory.java
     Factory for Hospital Rooms
@@ -10,7 +11,7 @@ import za.ac.cput.util.StringHelper;
 */
 public class HospitalRoomFactory {
     public static HospitalRoom createHospitalRoom(String roomID, int roomFloor) {
-        roomID = StringHelper.generateUnqiueID();
+        StringHelper.checkStringParam("roomId", roomID);
         return new HospitalRoom.Builder().roomID(roomID).roomFloor(roomFloor).build();
     }
 }

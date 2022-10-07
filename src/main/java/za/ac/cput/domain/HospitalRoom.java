@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Objects;
 
 /*
@@ -15,11 +16,8 @@ import java.util.Objects;
     Date: 3 August 2022
 */
 @Entity
-@Getter
-@ToString
-@NoArgsConstructor
 @Table(name = "tbl_hospital_room")
-public class HospitalRoom {
+public class HospitalRoom implements Serializable {
 
     @Id
     private String roomID;
@@ -30,6 +28,23 @@ public class HospitalRoom {
     public HospitalRoom(Builder builder) {
         this.roomID = builder.roomID;
         this.roomFloor = builder.roomFloor;
+    }
+
+    public HospitalRoom() {
+    }
+
+
+    public String getRoomID() {
+        return roomID;
+    }
+
+    public int getRoomFloor() {
+        return roomFloor;
+    }
+
+    @Override
+    public String toString() {
+        return "HospitalRoom{" + "roomID='" + roomID + '\'' + ", roomFloor=" + roomFloor + '}';
     }
 
     @Override
@@ -44,6 +59,7 @@ public class HospitalRoom {
     public int hashCode() {
         return Objects.hash(roomID, roomFloor);
     }
+
 
     public static class Builder {
         private String roomID;

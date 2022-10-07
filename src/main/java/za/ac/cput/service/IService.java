@@ -9,6 +9,6 @@ import java.util.Optional;
 */
 public interface IService <T,ID>{
     T save (T t);
-    T read(ID id);
+    Optional <T> read(ID id);
     boolean delete(ID id);
 }
