@@ -6,9 +6,10 @@ import za.ac.cput.domain.Invoice;
 import za.ac.cput.repository.InvoiceRepository;
 import za.ac.cput.service.InvoiceService;
 
-
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 /*
     InvoiceServiceImpl.java
     Service impl for Invoice
@@ -31,8 +32,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public Invoice read(String id) {
-        return this.repository.findById(id).orElse(null);
+    public Optional<Invoice> read(String id) {
+        return this.repository.findById(id);
     }
 
     @Override

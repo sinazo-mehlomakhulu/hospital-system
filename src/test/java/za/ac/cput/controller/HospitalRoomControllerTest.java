@@ -1,6 +1,9 @@
 package za.ac.cput.controller;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -14,11 +17,12 @@ import za.ac.cput.service.HospitalRoomService;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 /*
     HospitalRoomControllerTest.java
     Test for the Hospital Rooms Controller
     Author: Fayaad Abrahams (218221630)
-    Date: 6 October 2022
+    Date: 10 October 2022
 */
 @TestMethodOrder(MethodOrderer.MethodName.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -30,8 +34,10 @@ class HospitalRoomControllerTest {
     private int port;
     @Autowired
     private TestRestTemplate restTemplate;
+
     @Autowired
     private HospitalRoomController controller;
+
     @Autowired
     private HospitalRoomService hospitalRoomService;
 
@@ -40,7 +46,7 @@ class HospitalRoomControllerTest {
     @BeforeEach
     void setUp() {
         assertNotNull(controller);
-        this.hospitalRoom = HospitalRoomFactory.createHospitalRoom("10awd", 1);
+        this.hospitalRoom = HospitalRoomFactory.createHospitalRoom("101", 2);
         this.hospitalRoomService.save(hospitalRoom);
         this.baseUrl = "http://localhost:" + this.port + "/hospital system/hospitalroom/";
     }
@@ -71,15 +77,13 @@ class HospitalRoomControllerTest {
         this.restTemplate.delete(url);
     }
 
-
-    @Order(4)
     @Test
     public void d_findAll() {
         String url = baseUrl + "find-all";
         System.out.println(url);
         ResponseEntity<HospitalRoom[]> response = this.restTemplate.getForEntity(url, HospitalRoom[].class);
         System.out.println(Arrays.asList(response.getBody()));
-        assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertEquals(20, response.getBody().length));
+        assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertEquals(21, response.getBody().length));
     }
 
 }

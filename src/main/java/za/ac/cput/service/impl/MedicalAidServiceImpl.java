@@ -2,14 +2,14 @@ package za.ac.cput.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import za.ac.cput.domain.MedicalAid;
-
 import za.ac.cput.repository.MedicalAidRepository;
 import za.ac.cput.service.MedicalAidService;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 /*
    MedicalAidServiceImpl.java
     Service impl for  MedicalAid
@@ -32,9 +32,8 @@ public class MedicalAidServiceImpl implements MedicalAidService {
     }
 
     @Override
-    public MedicalAid read(String id) {
-        return this.repository.findById(id).orElse(null
-        );
+    public Optional<MedicalAid> read(String id) {
+        return Optional.ofNullable(this.repository.findById(id).orElse(null));
     }
 
     @Override

@@ -1,11 +1,13 @@
 package za.ac.cput.service.impl;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Invoice;
 import za.ac.cput.factory.InvoiceFactory;
+
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 /*
     InvoiceServiceImplTest.java
@@ -29,8 +31,8 @@ class InvoiceServiceImplTest {
 
     @Test
     void read() {
-        Invoice read = invService.read(invoice1.getInvoiceNum());
-        assertEquals(read.getInvoiceNum(), invoice1.getInvoiceNum());
+        Optional <Invoice> read = invService.read(invoice1.getInvoiceNum());
+        assertAll(() -> assertTrue(read.isPresent()), () -> assertEquals(invoice1, read.get()));
         System.out.println("Read: " + read);
     }
 

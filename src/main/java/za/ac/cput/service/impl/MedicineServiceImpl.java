@@ -11,6 +11,7 @@ import za.ac.cput.domain.Medicine;
 import za.ac.cput.repository.MedicineRepository;
 import za.ac.cput.service.MedicineService;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -27,8 +28,8 @@ public class MedicineServiceImpl implements MedicineService {
         return this.repository.save(medicine);
     }
     @Override
-    public Medicine read(String id) {
-        return this.repository.findById(id).orElse(null);
+    public Optional<Medicine> read(String id) {
+        return this.repository.findById(id);
     }
     @Override
     public boolean delete(String id) {

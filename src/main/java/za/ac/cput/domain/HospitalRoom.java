@@ -1,7 +1,6 @@
 package za.ac.cput.domain;
 
 import com.sun.istack.NotNull;
-import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
