@@ -43,7 +43,6 @@ public class NurseServiceImpl implements NurseService {
         }
         return false;
     }
-
     @Override
     public Set<Nurse> getAll() {
         return this.repository.findAll().stream().collect(Collectors.toSet());

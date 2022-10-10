@@ -2,7 +2,6 @@ package za.ac.cput.service.impl;
 
 //Sinenhlanhla Zondi
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

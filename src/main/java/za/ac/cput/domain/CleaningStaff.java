@@ -1,7 +1,11 @@
 package za.ac.cput.domain;
 
 import com.sun.istack.NotNull;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;

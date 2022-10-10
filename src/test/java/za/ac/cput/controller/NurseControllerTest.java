@@ -1,6 +1,9 @@
 package za.ac.cput.controller;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -19,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
     NurseControllerTest.java
     Test for the Nurse Controller
     Author: Fayaad Abrahams (218221630)
-    Date: 6 October 2022
+    Date: 10 October 2022
 */
 @TestMethodOrder(MethodOrderer.MethodName.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -72,8 +75,6 @@ class NurseControllerTest {
         this.restTemplate.delete(url);
     }
 
-
-    @Order(4)
     @Test
     public void d_findAll() {
         String url = baseUrl + "find-all";

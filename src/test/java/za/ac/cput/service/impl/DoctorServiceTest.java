@@ -2,14 +2,11 @@ package za.ac.cput.service.impl;
 
 //Sinenhlanhla Zondi
 
-import com.mysql.cj.log.Log;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Doctor;
-
-import javax.print.Doc;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;

@@ -3,12 +3,13 @@ package za.ac.cput.service.impl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import za.ac.cput.domain.Invoice;
 import za.ac.cput.domain.MedicalAid;
-import za.ac.cput.factory.InvoiceFactory;
 import za.ac.cput.factory.MedicalAidFactory;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
+
 /*
     MedicalAidServiceImplTest.java
     Service test for MedicalAid
@@ -17,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 */
 @SpringBootTest
 class MedicalAidServiceImplTest {
-    private final MedicalAid medAid1 = MedicalAidFactory.createMedicalAid("7422132132","Discovery","67 Burnistone Road, Belleville");
+    private final MedicalAid medAid1 = MedicalAidFactory.createMedicalAid("7422132132", "Discovery", "67 Burnistone Road, Belleville");
     @Autowired
     private MedicalAidServiceImpl medService;
 
@@ -29,8 +30,8 @@ class MedicalAidServiceImplTest {
 
     @Test
     void read() {
-        MedicalAid read = medService.read(medAid1.getMedicalNum());
-        assertEquals(read.getMedicalNum(), medAid1.getMedicalNum());
+        Optional<MedicalAid> read = medService.read(medAid1.getMedicalNum());
+        assertAll(() -> assertTrue(read.isPresent()), () -> assertEquals(medAid1, read.get()));
         System.out.println("Read: " + read);
     }
 

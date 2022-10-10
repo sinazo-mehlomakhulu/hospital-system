@@ -12,6 +12,7 @@ import za.ac.cput.domain.Patient;
 import za.ac.cput.repository.PatientRepository;
 import za.ac.cput.service.PatientService;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -24,14 +25,17 @@ public class PatientServiceImpl implements PatientService {
     public PatientServiceImpl(PatientRepository repository) {
         this.repository = repository;
     }
+
     @Override
     public Patient save(Patient patient) {
         return this.repository.save(patient);
     }
+
     @Override
-    public Patient read(String id) {
-        return this.repository.findById(id).orElse(null);
+    public Optional<Patient> read(String id) {
+        return this.repository.findById(id);
     }
+
     @Override
     public boolean delete(String id) {
         if (this.repository.existsById(id)) {
@@ -40,8 +44,9 @@ public class PatientServiceImpl implements PatientService {
         }
         return false;
     }
+
     @Override
-    public Set<Patient>getAll(){
+    public Set<Patient> getAll() {
         return this.repository.findAll().stream().collect(Collectors.toSet());
     }
 }
