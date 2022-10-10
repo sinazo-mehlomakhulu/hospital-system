@@ -1,9 +1,6 @@
 package za.ac.cput.service.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Doctor;
 import za.ac.cput.repository.DoctorRepository;

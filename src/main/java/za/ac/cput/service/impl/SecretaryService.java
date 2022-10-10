@@ -2,6 +2,7 @@ package za.ac.cput.service.impl;
 
 //Sinenhlanhla Zondi
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.ac.cput.domain.Secretary;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@Slf4j
 public class SecretaryService {
 
     private final SecretaryRepository secretaryRepository;
@@ -40,6 +42,7 @@ public class SecretaryService {
             secretaryRepository.deleteById(id);
             return true;
         }
+        System.out.println("Secretary ID not found.");
         return false;
     }
 
