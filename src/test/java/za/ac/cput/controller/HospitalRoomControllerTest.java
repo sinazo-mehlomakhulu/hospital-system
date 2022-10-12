@@ -15,6 +15,7 @@ import za.ac.cput.factory.HospitalRoomFactory;
 import za.ac.cput.service.HospitalRoomService;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,6 +29,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class HospitalRoomControllerTest {
 
+    public static String SECURITY_USERNAME = "user";
+    public static String SECURITY_PASSWORD = "password";
 
     private String baseUrl;
     @LocalServerPort
@@ -55,7 +58,8 @@ class HospitalRoomControllerTest {
     void a_save() {
         String url = baseUrl + "save";
         System.out.println(url);
-        ResponseEntity<HospitalRoom> response = this.restTemplate.postForEntity(url, this.hospitalRoom, HospitalRoom.class);
+        ResponseEntity<HospitalRoom> response = this.restTemplate
+                .postForEntity(url, this.hospitalRoom, HospitalRoom.class);
         System.out.println(response);
         assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertNotNull(response.getBody()));
     }
@@ -64,7 +68,9 @@ class HospitalRoomControllerTest {
     public void b_read() {
         String url = baseUrl + "read/" + this.hospitalRoom.getRoomID();
         System.out.println(url);
-        ResponseEntity<HospitalRoom> response = this.restTemplate.getForEntity(url, HospitalRoom.class);
+        ResponseEntity<HospitalRoom> response = this.restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .getForEntity(url, HospitalRoom.class);
         System.out.println(response);
         assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertNotNull(response.getBody()));
     }
@@ -81,8 +87,11 @@ class HospitalRoomControllerTest {
     public void d_findAll() {
         String url = baseUrl + "find-all";
         System.out.println(url);
-        ResponseEntity<HospitalRoom[]> response = this.restTemplate.getForEntity(url, HospitalRoom[].class);
-        System.out.println(Arrays.asList(response.getBody()));
+        ResponseEntity<HospitalRoom[]> response = this.restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .getForEntity(url, HospitalRoom[].class);
+        System.out.println("Show All:");
+        System.out.println(Arrays.asList(Objects.requireNonNull(response.getBody())));
         assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertEquals(21, response.getBody().length));
     }
 
