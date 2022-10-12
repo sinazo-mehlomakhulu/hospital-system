@@ -4,7 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 import za.ac.cput.domain.Doctor;
 import za.ac.cput.service.impl.DoctorService;
 
@@ -15,10 +21,11 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class DoctorControllerTest {
 
-    private String baseUrl;
-
     @LocalServerPort
     private int port;
+
+    @Autowired
+    private TestRestTemplate restTemplate;
 
     @Autowired
     private DoctorController doctorController;
@@ -28,12 +35,8 @@ public class DoctorControllerTest {
 
     private Doctor doctor;
 
-    @BeforeEach
-    void setUp()
-    {
-        assertNotNull(doctorController);
-        this.baseUrl = "http://localhost:" + this.port + "/hospital-system/doctor";
-    }
+    public static String SECURITY_USERNAME = "user";
+    public static String SECURITY_PASSWORD = "pass123";
 
     @Test
     void save()
@@ -63,9 +66,17 @@ public class DoctorControllerTest {
     @Test
     void findAll()
     {
-        List<Doctor> allDoctors = doctorService.listDoctors();
-        System.out.println(allDoctors);
-        assertNotNull(allDoctors);
+        //List<Doctor> allDoctors = doctorService.listDoctors();
+
+        String url = "http://localhost:" + this.port + "/hospital-system/doctor";
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> entity = new HttpEntity<>(null, headers);
+        ResponseEntity<String> response = restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .exchange(url, HttpMethod.GET, entity, String.class);
+
+        //System.out.println(allDoctors);
+        //assertNotNull(allDoctors);
     }
 
 }
