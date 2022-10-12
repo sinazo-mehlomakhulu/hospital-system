@@ -12,4 +12,5 @@ CleaningStaff Repository.java
  */
 @Repository
 public interface CleaningStaffRepository extends JpaRepository<CleaningStaff, String> {
+    CleaningStaff save(CleaningStaff cleaningStaff);
 }
