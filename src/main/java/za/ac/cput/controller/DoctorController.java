@@ -2,6 +2,7 @@ package za.ac.cput.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.domain.Doctor;
 import za.ac.cput.service.impl.DoctorService;
@@ -33,13 +34,16 @@ public class DoctorController {
         return doctorService.getDoctor(id);
     }
 
+
     @DeleteMapping
+    @PreAuthorize("hasRole('admin')")
     public boolean delete(@RequestParam("id") String id)
     {
         return doctorService.deleteDoctor(id);
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('admin')")
     public List<Doctor> listAll()
     {
         return doctorService.listDoctors();
