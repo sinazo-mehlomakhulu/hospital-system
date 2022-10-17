@@ -22,7 +22,7 @@ public class DoctorController {
         this.doctorService = doctorService;
     }
 
-    @PostMapping
+    @PostMapping("create")
     public Doctor createDoctor(@RequestBody Doctor doctor)
     {
         return doctorService.saveDoctor(doctor);
@@ -40,7 +40,7 @@ public class DoctorController {
         return doctorService.deleteDoctor(id);
     }
 
-    @GetMapping
+    @GetMapping("get-all")
     public List<Doctor> listAll()
     {
         return doctorService.listDoctors();

@@ -3,16 +3,13 @@ package za.ac.cput.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -28,7 +25,7 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService (BCryptPasswordEncoder bCryptPasswordEncoder){
-    //Creating the roles for the system
+        //Creating the roles for the system
         InMemoryUserDetailsManager man = new InMemoryUserDetailsManager();
         man.createUser(User.withUsername("admin-user")
                 .password(bCryptPasswordEncoder.encode("65ff7492d30"))
@@ -44,31 +41,34 @@ public class SecurityConfig {
         return man;
     }
 
-        @Bean
-      public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception{
-       //Allocating the roles permissions
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception
+    {
+        //Allocating the roles permissions
         httpSecurity.httpBasic()
                 .and().csrf().disable().formLogin().disable()
                 //Place all roles for different domains below
-                
+
                 //Path matcher For the Hospital System
                 .authorizeHttpRequests()
                 .antMatchers(HttpMethod.POST, "/**/hospitalroom/save").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/**/hospitalroom/delete/{id}").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/**/hospitalroom/read/{id}").hasAnyRole("USER","ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/**/hospitalroom/delete/{id}").hasRole("ADMIN")
+                //changed this because only the admin should read specific IDs
+                .antMatchers(HttpMethod.GET, "/**/hospitalroom/read/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/**/hospitalroom/find-all").hasAnyRole("USER","ADMIN")
+
+                //Path matcher for Doctor
+                .antMatchers(HttpMethod.POST, "/hospital-system/doctor/create").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/hospital-system/doctor/read/{id}").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/hospital-system/doctor/get-all").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.DELETE, "/hospital-system/doctor/delete/{id}").hasRole("ADMIN")
 
                 //Path matcher For the Nurse System
                 .antMatchers(HttpMethod.POST, "/**/nurse/save").hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/**/nurse/delete/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/**/nurse/read/{id}").hasAnyRole("USER","ADMIN")
                 .antMatchers(HttpMethod.GET, "/**/nurse/find-all").hasAnyRole("USER","ADMIN")
-
-
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-
-
-            return httpSecurity.build();
+        return httpSecurity.build();
     }
 }
