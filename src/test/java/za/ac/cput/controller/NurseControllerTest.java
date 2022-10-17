@@ -27,7 +27,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class NurseControllerTest {
-
+    public static String SECURITY_USERNAME = "user";
+    public static String SECURITY_PASSWORD = "password";
 
     private String baseUrl;
     @LocalServerPort
@@ -53,7 +54,9 @@ class NurseControllerTest {
     void a_save() {
         String url = baseUrl + "save";
         System.out.println(url);
-        ResponseEntity<Nurse> response = this.restTemplate.postForEntity(url, this.nurse, Nurse.class);
+        ResponseEntity<Nurse> response = this.restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .postForEntity(url, this.nurse, Nurse.class);
         System.out.println(response);
         assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertNotNull(response.getBody()));
     }
@@ -62,7 +65,9 @@ class NurseControllerTest {
     public void b_read() {
         String url = baseUrl + "read/" + this.nurse.getNurseID();
         System.out.println(url);
-        ResponseEntity<Nurse> response = this.restTemplate.getForEntity(url, Nurse.class);
+        ResponseEntity<Nurse> response = this.restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .getForEntity(url, Nurse.class);
         System.out.println(response);
         assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertNotNull(response.getBody()));
     }
@@ -79,7 +84,9 @@ class NurseControllerTest {
     public void d_findAll() {
         String url = baseUrl + "find-all";
         System.out.println(url);
-        ResponseEntity<Nurse[]> response = this.restTemplate.getForEntity(url, Nurse[].class);
+        ResponseEntity<Nurse[]> response = this.restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .getForEntity(url, Nurse[].class);
         System.out.println(Arrays.asList(response.getBody()));
         assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertEquals(17, response.getBody().length));
     }
