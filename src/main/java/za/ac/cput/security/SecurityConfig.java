@@ -49,7 +49,7 @@ public class SecurityConfig {
        //Allocating the roles permissions
         httpSecurity.httpBasic()
                 .and().csrf().disable().formLogin().disable()
-                //Place all roles for different domains below =>
+                //Place all roles for different domains below
                 
                 //Path matcher For the Hospital System
                 .authorizeHttpRequests()
