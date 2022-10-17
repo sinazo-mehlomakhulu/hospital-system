@@ -34,16 +34,13 @@ public class DoctorController {
         return doctorService.getDoctor(id);
     }
 
-
-    @DeleteMapping
-    @PreAuthorize("hasRole('admin')")
+    @DeleteMapping("delete/{id}")
     public boolean delete(@RequestParam("id") String id)
     {
         return doctorService.deleteDoctor(id);
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('admin')")
     public List<Doctor> listAll()
     {
         return doctorService.listDoctors();

@@ -1,19 +1,18 @@
 package za.ac.cput.controller;
 
+import org.apache.coyote.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 import za.ac.cput.domain.Doctor;
 import za.ac.cput.service.impl.DoctorService;
 
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,13 +34,10 @@ public class DoctorControllerTest {
 
     private Doctor doctor;
 
-    public static String SECURITY_USERNAME = "user";
-    public static String SECURITY_PASSWORD = "pass123";
-
     @Test
     void save()
     {
-        this.doctor = new Doctor("02JaFo82", "Jane", "Foster", "0236542182");
+        this.doctor = new Doctor("02Mark95", "Mark", "Zuckerberg", "0236547895");
         this.doctorService.saveDoctor(doctor);
         assertNotNull(doctor);
     }
@@ -58,7 +54,7 @@ public class DoctorControllerTest {
     @Test
     void delete()
     {
-        Doctor doctorId = new Doctor("07sJulie14", "", "", "");
+        Doctor doctorId = new Doctor("02Mark95", "", "", "");
         boolean deleted = doctorService.deleteDoctor(doctorId.getDocID());
         assertTrue(deleted);
     }
@@ -66,17 +62,13 @@ public class DoctorControllerTest {
     @Test
     void findAll()
     {
-        //List<Doctor> allDoctors = doctorService.listDoctors();
-
         String url = "http://localhost:" + this.port + "/hospital-system/doctor";
-        HttpHeaders headers = new HttpHeaders();
-        HttpEntity<String> entity = new HttpEntity<>(null, headers);
-        ResponseEntity<String> response = restTemplate
-                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
-                .exchange(url, HttpMethod.GET, entity, String.class);
 
-        //System.out.println(allDoctors);
-        //assertNotNull(allDoctors);
+        ResponseEntity<Doctor[]> response = this.restTemplate
+                .withBasicAuth("user", "user123")
+                .getForEntity(url, Doctor[].class);
+        assertSame(HttpStatus.OK, response.getStatusCode());
+        //assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertEquals(17, response.getBody().length));
     }
 
 }
