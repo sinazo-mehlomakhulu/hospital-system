@@ -6,6 +6,7 @@ import za.ac.cput.domain.Supplier;
 import za.ac.cput.repository.SupplierRepository;
 import za.ac.cput.service.SupplierService;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,7 @@ public class SupplierServiceImpl implements SupplierService {
         this.supplierRepository = supplierRepository;
     }
 
-    public Supplier saveSupplier(Supplier supplier)
+    public Supplier save(Supplier supplier)
     {
         return supplierRepository.save(supplier);
     }
@@ -44,6 +45,19 @@ public class SupplierServiceImpl implements SupplierService {
         return supplierRepository.findById(suppRegNum).orElse(new Supplier()) ;
     }
 
+    @Override
+    public Optional<Supplier> read(String s) {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean delete(String id) {
+        if (this.supplierRepository.existsById(id)) {
+            this.supplierRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
     public List listSupplier() {
         return supplierRepository.findAll().stream().collect(Collectors.toList());
     }

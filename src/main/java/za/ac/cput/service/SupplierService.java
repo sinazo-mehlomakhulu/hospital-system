@@ -5,7 +5,7 @@ import za.ac.cput.domain.Supplier;
 import java.util.Set;
 
 
-public interface SupplierService {
+public interface SupplierService extends IService<Supplier, String>{
     Supplier findById(String id);
 
     Supplier findByNum(String suppRegNum);

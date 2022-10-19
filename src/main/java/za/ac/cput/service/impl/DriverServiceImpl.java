@@ -6,6 +6,7 @@ import za.ac.cput.domain.Driver;
 import za.ac.cput.repository.DriverRepository;
 import za.ac.cput.service.DriverService;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,12 +39,27 @@ public class DriverServiceImpl implements DriverService {
         return driverRepository.findById(id).orElse(new Driver());
     }
 
-    @Override
-    public Driver findByNum(String driverLicenseNum) {
-        return null;
-    }
     public List listDriver()
     {
         return driverRepository.findAll().stream().collect(Collectors.toList());
+    }
+
+    @Override
+    public Driver save(Driver driver) {
+        return null;
+    }
+
+    @Override
+    public Optional<Driver> read(String s) {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean delete(String id) {
+        if (this.driverRepository.existsById(id)) {
+            this.driverRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }
