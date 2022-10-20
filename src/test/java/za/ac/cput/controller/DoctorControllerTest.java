@@ -62,7 +62,7 @@ public class DoctorControllerTest {
     @Test
     void findAll()
     {
-        String url = "http://localhost:" + this.port + "/hospital-system/doctor";
+        String url = "http://localhost:" + this.port + "/hospital-system/doctor/get-all";
 
         ResponseEntity<Doctor[]> response = this.restTemplate
                 .withBasicAuth("user", "user123")
