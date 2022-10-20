@@ -10,6 +10,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import za.ac.cput.domain.Doctor;
 import za.ac.cput.domain.HospitalRoom;
 import za.ac.cput.factory.HospitalRoomFactory;
 import za.ac.cput.service.HospitalRoomService;
@@ -59,6 +60,7 @@ class HospitalRoomControllerTest {
         String url = baseUrl + "save";
         System.out.println(url);
         ResponseEntity<HospitalRoom> response = this.restTemplate
+                .withBasicAuth("admin-user", "65ff7492d30")
                 .postForEntity(url, this.hospitalRoom, HospitalRoom.class);
         System.out.println(response);
         assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertNotNull(response.getBody()));
@@ -69,12 +71,11 @@ class HospitalRoomControllerTest {
         String url = baseUrl + "read/" + this.hospitalRoom.getRoomID();
         System.out.println(url);
         ResponseEntity<HospitalRoom> response = this.restTemplate
-                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .withBasicAuth("admin-user", "65ff7492d30")
                 .getForEntity(url, HospitalRoom.class);
         System.out.println(response);
         assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertNotNull(response.getBody()));
     }
-
 
     @Test
     public void c_delete() {
@@ -88,7 +89,7 @@ class HospitalRoomControllerTest {
         String url = baseUrl + "find-all";
         System.out.println(url);
         ResponseEntity<HospitalRoom[]> response = this.restTemplate
-                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .withBasicAuth("client-user", "1253208465b")
                 .getForEntity(url, HospitalRoom[].class);
         System.out.println("Show All:");
         System.out.println(Arrays.asList(Objects.requireNonNull(response.getBody())));

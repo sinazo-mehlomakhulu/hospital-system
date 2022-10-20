@@ -65,9 +65,11 @@ public class SecurityConfig {
 
                 //Path matcher For the Nurse System
                 .antMatchers(HttpMethod.POST, "/**/nurse/save").hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/**/nurse/delete/{id}").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/**/nurse/delete/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/**/nurse/read/{id}").hasAnyRole("USER","ADMIN")
                 .antMatchers(HttpMethod.GET, "/**/nurse/find-all").hasAnyRole("USER","ADMIN")
+
+
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return httpSecurity.build();
     }

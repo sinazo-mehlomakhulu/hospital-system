@@ -55,7 +55,7 @@ class NurseControllerTest {
         String url = baseUrl + "save";
         System.out.println(url);
         ResponseEntity<Nurse> response = this.restTemplate
-                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .withBasicAuth("admin-user", "65ff7492d30")
                 .postForEntity(url, this.nurse, Nurse.class);
         System.out.println(response);
         assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertNotNull(response.getBody()));
@@ -66,7 +66,7 @@ class NurseControllerTest {
         String url = baseUrl + "read/" + this.nurse.getNurseID();
         System.out.println(url);
         ResponseEntity<Nurse> response = this.restTemplate
-                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .withBasicAuth("admin-user", "65ff7492d30")
                 .getForEntity(url, Nurse.class);
         System.out.println(response);
         assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertNotNull(response.getBody()));
@@ -85,7 +85,7 @@ class NurseControllerTest {
         String url = baseUrl + "find-all";
         System.out.println(url);
         ResponseEntity<Nurse[]> response = this.restTemplate
-                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .withBasicAuth("admin-user", "65ff7492d30")
                 .getForEntity(url, Nurse[].class);
         System.out.println(Arrays.asList(response.getBody()));
         assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertEquals(17, response.getBody().length));

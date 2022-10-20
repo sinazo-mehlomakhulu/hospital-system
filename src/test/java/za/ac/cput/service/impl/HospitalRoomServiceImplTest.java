@@ -21,9 +21,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 @SpringBootTest
 public class HospitalRoomServiceImplTest {
-    private static final HospitalRoom hospitalRoom1 = HospitalRoomFactory.createHospitalRoom("1919319", 2);
-    private static final HospitalRoom hospitalRoom2 = HospitalRoomFactory.createHospitalRoom("", 12);
-    private static final HospitalRoom hospitalRoom3 = HospitalRoomFactory.createHospitalRoom("", 3);
+    private static final HospitalRoom hospitalRoom1 = HospitalRoomFactory.createHospitalRoom("12", 2);
+    private static final HospitalRoom hospitalRoom2 = HospitalRoomFactory.createHospitalRoom("13", 12);
+    private static final HospitalRoom hospitalRoom3 = HospitalRoomFactory.createHospitalRoom("14", 3);
+
     @Autowired
     private HospitalRoomServiceImpl service;
 
