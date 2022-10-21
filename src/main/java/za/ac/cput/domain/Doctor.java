@@ -1,7 +1,5 @@
 package za.ac.cput.domain;
 
-//Sinenhlanhla Zondi
-
 import com.sun.istack.NotNull;
 import lombok.*;
 
@@ -17,7 +15,6 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Table(name = "tbl_doctor")
 public class Doctor {
-
     @Id
     @NotNull
     private String docID;

@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import za.ac.cput.domain.Appointment;
 import za.ac.cput.domain.Doctor;
-import za.ac.cput.domain.HospitalRoom;
 import za.ac.cput.service.AppointmentService;
 
-import java.util.List;
 import java.util.Set;
 
 
