@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 //Sinazo Mehlomakhulu(216076498)
 @Service
 @Transactional
-public class CleaningStaffServiceImpl{
+public class CleaningStaffServiceImpl implements CleaningStaffService{
 
     private final CleaningStaffRepository repository;
 
@@ -24,18 +24,18 @@ public class CleaningStaffServiceImpl{
         this.repository = repository;
     }
 
-
+@Override
     public CleaningStaff save(CleaningStaff cleaningStaff) {
 
         return repository.save(cleaningStaff);
     }
 
-
+@Override
     public Optional<CleaningStaff> read(String id) {
         return this.repository.findById(id);
     }
 
-
+@Override
     public boolean delete(String id) {
         if (this.repository.existsById(id)) {
             this.repository.deleteById(id);
