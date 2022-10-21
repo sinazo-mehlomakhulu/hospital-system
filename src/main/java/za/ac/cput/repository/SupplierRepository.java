@@ -14,4 +14,5 @@ import za.ac.cput.domain.Supplier;
 
 @Repository
 public interface SupplierRepository extends JpaRepository<Supplier, String> {
+
 }
