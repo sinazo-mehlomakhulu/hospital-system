@@ -2,12 +2,19 @@ package za.ac.cput.service;
 
 import za.ac.cput.domain.Supplier;
 
+import java.util.List;
 import java.util.Set;
 
+/*
+    SupplierService.java
+    Services for Supplier
+    Author: Nonzwakazi Mgxaji
+    Student number: 213181584
+    Date: 14 August 2022
+*/
 
 public interface SupplierService extends IService<Supplier, String>{
     Supplier findById(String id);
 
-    Supplier findByNum(String suppRegNum);
-    Set<Supplier> getAll();
+    List<Supplier> getAll();
 }

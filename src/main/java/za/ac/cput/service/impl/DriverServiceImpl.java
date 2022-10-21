@@ -10,6 +10,14 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/*
+    DriverServiceImpl.java
+    Services Implementation for Driver
+    Author: Nonzwakazi Mgxaji
+    Student number: 213181584
+    Date: 16 August 2022
+*/
+
 @Service
 public class DriverServiceImpl implements DriverService {
     private final DriverRepository driverRepository;
@@ -19,10 +27,7 @@ public class DriverServiceImpl implements DriverService {
         this.driverRepository = driverRepository;
     }
 
-    public Driver saveDriver(Driver  driver)
-    {
-        return driverRepository.save(driver);
-    }
+
 
     public Driver getDriver(String id) {
         return driverRepository.findById(id).orElse(null);
@@ -30,8 +35,8 @@ public class DriverServiceImpl implements DriverService {
 
 
     @Override
-    public Set<Driver> getAll() {
-        return null;
+    public List<Driver> getAll() {
+        return this.driverRepository.findAll();
     }
 
     @Override
@@ -46,7 +51,7 @@ public class DriverServiceImpl implements DriverService {
 
     @Override
     public Driver save(Driver driver) {
-        return null;
+        return driverRepository.save(driver);
     }
 
     @Override

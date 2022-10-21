@@ -1,7 +1,6 @@
 package za.ac.cput.domain;
 
 import com.sun.istack.NotNull;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -10,8 +9,9 @@ import java.util.Objects;
 
 /*
     Supplier.java
-    Supplier Entity
-    Author: Nonzwakazi Mgxaji 213181584
+    Entity for Supplier
+    Author: Nonzwakazi Mgxaji
+    Student number: 213181584
     Date: 4 August 2022
 */
 @Entity
@@ -61,11 +61,11 @@ public class Supplier implements Serializable {
         Supplier supplier = (Supplier) o;
         return suppID.equals(supplier.suppID) && suppAddress.equals(supplier.suppAddress) && suppRegNum.equals(supplier.suppRegNum);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(suppID, suppAddress, suppRegNum);
-    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(suppID, suppAddress, suppRegNum);
+//    }
 
     public static class Builder {
         private String suppID, suppAddress, suppRegNum;

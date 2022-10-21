@@ -9,10 +9,12 @@ import java.util.Objects;
 
 /*
     Driver.java
-    Driver Entity
-    Author: Nonzwakazi Mgxaji 213181584
+    Entity for Driver
+    Author: Nonzwakazi Mgxaji
+    Student number: 213181584
     Date: 4 August 2022
 */
+
 @Entity
 @Table(name = "tbl_driver")
 public class Driver implements Serializable {

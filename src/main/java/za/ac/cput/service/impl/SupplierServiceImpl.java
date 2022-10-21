@@ -10,6 +10,14 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/*
+    SupplierServiceImpl.java
+    Services Implementation for Supplier
+    Author: Nonzwakazi Mgxaji
+    Student number: 213181584
+    Date: 16 August 2022
+*/
+
 @Service
 public class SupplierServiceImpl implements SupplierService {
     private final SupplierRepository supplierRepository;
@@ -19,20 +27,20 @@ public class SupplierServiceImpl implements SupplierService {
         this.supplierRepository = supplierRepository;
     }
 
-    public Supplier save(Supplier supplier)
-    {
-        return supplierRepository.save(supplier);
-    }
 
-    public Supplier getSupplier(String id)
-    {
+
+    public Supplier getSupplier(String id) {
         return supplierRepository.findById(id).orElse(null);
     }
 
+    @Override
+    public Supplier save(Supplier supplier) {
+        return this.supplierRepository.save(supplier);
+    }
 
     @Override
-    public Set<Supplier> getAll() {
-        return null;
+    public List<Supplier> getAll() {
+        return this.supplierRepository.findAll();
     }
 
     @Override
@@ -40,10 +48,7 @@ public class SupplierServiceImpl implements SupplierService {
         return supplierRepository.findById(id).orElse(new Supplier());
     }
 
-    @Override
-    public Supplier findByNum(String suppRegNum) {
-        return supplierRepository.findById(suppRegNum).orElse(new Supplier()) ;
-    }
+
 
     @Override
     public Optional<Supplier> read(String s) {
@@ -52,10 +57,7 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public boolean delete(String id) {
-        if (this.supplierRepository.existsById(id)) {
-            this.supplierRepository.deleteById(id);
-            return true;
-        }
+        this.supplierRepository.deleteById(id);
         return false;
     }
     public List listSupplier() {
