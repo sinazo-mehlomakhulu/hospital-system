@@ -5,6 +5,7 @@ package za.ac.cput.service.impl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import za.ac.cput.domain.Secretary;
 
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertNotSame;

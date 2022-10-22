@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.domain.Doctor;
+import za.ac.cput.domain.Secretary;
 import za.ac.cput.service.impl.SecretaryService;
 
 import java.util.List;
