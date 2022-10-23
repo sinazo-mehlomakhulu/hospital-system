@@ -5,7 +5,7 @@ import za.ac.cput.domain.MedicalAid;
 import za.ac.cput.util.StringHelper;
 /*
     MedicalAidFactory.java
-    Factory for  MedicalAid
+    Factory for  Medical Aid
     Author: Shina Kara (219333181)
     Date: 13 August 2022
 */

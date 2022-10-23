@@ -10,7 +10,7 @@ import java.util.Objects;
 /*
     Invoice.java
     Entity for the Invoice
-    Author: Shina Kara (219333181)
+    Author: Shina Kara (219333181).
     Date: 4 August 2022
 */
 @Entity

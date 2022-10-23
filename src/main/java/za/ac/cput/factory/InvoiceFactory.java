@@ -4,7 +4,7 @@ import za.ac.cput.domain.Invoice;
 import za.ac.cput.util.StringHelper;
 /*
     InvoiceFactory.java
-    Factory for  Invoice
+    Factory for  Invoice .
     Author: Shina Kara (219333181)
     Date: 13 August 2022
 */

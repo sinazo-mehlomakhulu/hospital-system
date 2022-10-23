@@ -9,10 +9,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import za.ac.cput.domain.Invoice;
 import za.ac.cput.factory.InvoiceFactory;
-
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
+/*
+    InvoiceControllerTest.java
+    Test for the Invoice
+    Author: Shina Kara (219333181).
+    Date: 23 October 2022
+*/
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -85,7 +90,7 @@ class  InvoiceControllerTest {
         System.out.println(Arrays.asList(response.getBody()));
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
-                () -> assertEquals(0, response.getBody().length)
+                () -> assertEquals(1, response.getBody().length)
         );
     }
 }

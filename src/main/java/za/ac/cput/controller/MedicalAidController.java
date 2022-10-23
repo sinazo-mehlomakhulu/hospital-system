@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.Set;
 /*
     MedicalAidController.java
-    Controller for the Medical Aid
+    Controller for the Medical Aid .
     Author: Shina Kara (219333181)
     Date: 4 August 2022
 */

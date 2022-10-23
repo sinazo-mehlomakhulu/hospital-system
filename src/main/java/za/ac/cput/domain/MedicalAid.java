@@ -9,7 +9,7 @@ import java.util.Objects;
 /*
     MedicalAid.java
     Entity for the Medical Aid
-    Author: Shina Kara (219333181)
+    Author: Shina Kara (219333181).
     Date: 4 August 2022
 */
 @Entity

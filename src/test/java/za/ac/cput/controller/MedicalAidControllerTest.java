@@ -13,7 +13,12 @@ import za.ac.cput.factory.MedicalAidFactory;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/*
+    MedicalAidControllerTest.java
+    Test for the MedicalAid
+    Author: Shina Kara (219333181).
+    Date: 23 October 2022
+*/
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class  MedicalAidControllerTest {
@@ -85,7 +90,7 @@ class  MedicalAidControllerTest {
         System.out.println(Arrays.asList(response.getBody()));
         assertAll(
                 () -> assertEquals(HttpStatus.OK, response.getStatusCode()),
-                () -> assertEquals(0, response.getBody().length)
+                () -> assertEquals(1, response.getBody().length)
         );
     }
 }
