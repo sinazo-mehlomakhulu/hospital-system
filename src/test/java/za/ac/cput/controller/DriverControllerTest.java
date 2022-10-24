@@ -10,90 +10,85 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import za.ac.cput.domain.Doctor;
-import za.ac.cput.domain.HospitalRoom;
-import za.ac.cput.factory.HospitalRoomFactory;
-import za.ac.cput.service.HospitalRoomService;
-
+import za.ac.cput.domain.Driver;
+import za.ac.cput.factory.DriverFactory;
+import za.ac.cput.service.DriverService;
+import za.ac.cput.service.impl.DriverServiceImpl;
 import java.util.Arrays;
 import java.util.Objects;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 /*
-    HospitalRoomControllerTest.java
-    Test for the Hospital Rooms Controller
-    Author: Fayaad Abrahams (218221630)
-    Date: 10 October 2022
+    DriverControllerTest.java
+    Test for the Driver Controller
+    Author: Nonzwakazi Mgxaji
+    Date: 16 October 2022
 */
 @TestMethodOrder(MethodOrderer.MethodName.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class HospitalRoomControllerTest {
-
-    public static String SECURITY_USERNAME = "user";
-    public static String SECURITY_PASSWORD = "password";
+class DriverControllerTest {
+    public static String SECURITY_USERNAME = "admin-user";
+    public static String SECURITY_PASSWORD = "65ff7492d30";
 
     private String baseUrl;
     @LocalServerPort
     private int port;
     @Autowired
     private TestRestTemplate restTemplate;
-
     @Autowired
-    private HospitalRoomController controller;
-
+    private DriverController controller;
     @Autowired
-    private HospitalRoomService hospitalRoomService;
+    private DriverServiceImpl driverService;
 
-    private HospitalRoom hospitalRoom;
+    private Driver driver;
 
     @BeforeEach
     void setUp() {
         assertNotNull(controller);
-        this.hospitalRoom = HospitalRoomFactory.createHospitalRoom("101", 2);
-        this.hospitalRoomService.save(hospitalRoom);
-        this.baseUrl = "http://localhost:" + this.port + "/hospital system/hospitalroom/";
+        this.driver = DriverFactory.createDriver("29", "Nzwakie", "Mgxaji", "CA123456");
+        this.baseUrl = "http://localhost:" + this.port + "/driver/";
     }
 
     @Test
     void a_save() {
-        String url = baseUrl + "save";
+        String url = baseUrl + "save/";
         System.out.println(url);
-        ResponseEntity<HospitalRoom> response = this.restTemplate
-                .withBasicAuth("admin-user", "65ff7492d30")
-                .postForEntity(url, this.hospitalRoom, HospitalRoom.class);
+        ResponseEntity<Driver> response = this.restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .postForEntity(url, this.driver, Driver.class);
         System.out.println(response);
         assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertNotNull(response.getBody()));
     }
 
     @Test
     public void b_read() {
-        String url = baseUrl + "read/" + this.hospitalRoom.getRoomID();
+        String url = baseUrl + "find/" + this.driver.getDriverID();
         System.out.println(url);
-        ResponseEntity<HospitalRoom> response = this.restTemplate
-                .withBasicAuth("admin-user", "65ff7492d30")
-                .getForEntity(url, HospitalRoom.class);
+        ResponseEntity<Driver> response = this.restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .getForEntity(url, Driver.class);
         System.out.println(response);
         assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertNotNull(response.getBody()));
     }
 
+
     @Test
     public void c_delete() {
-        String url = baseUrl + "delete/" + this.hospitalRoom.getRoomID();
+        String url = baseUrl + "delete/" + this.driver.getDriverID();
         System.out.println(url);
         this.restTemplate.delete(url);
     }
 
     @Test
     public void d_findAll() {
-        String url = baseUrl + "find-all";
+        String url = baseUrl + "all/";
         System.out.println(url);
-        ResponseEntity<HospitalRoom[]> response = this.restTemplate
-                .withBasicAuth("client-user", "1253208465b")
-                .getForEntity(url, HospitalRoom[].class);
+        ResponseEntity<Driver[]> response = this.restTemplate
+                .withBasicAuth(SECURITY_USERNAME, SECURITY_PASSWORD)
+                .getForEntity(url, Driver[].class);
+        assertNotNull(response);
+        assertAll(()->assertEquals(HttpStatus.OK,response.getStatusCode()));
         System.out.println("Show All:");
         System.out.println(Arrays.asList(Objects.requireNonNull(response.getBody())));
-        assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertEquals(22, response.getBody().length));
     }
-
 }

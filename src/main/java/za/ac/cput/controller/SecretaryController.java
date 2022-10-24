@@ -1,10 +1,8 @@
 package za.ac.cput.controller;
 
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import za.ac.cput.domain.Doctor;
 import za.ac.cput.domain.Secretary;
 import za.ac.cput.service.impl.SecretaryService;
 
@@ -23,7 +21,7 @@ public class SecretaryController {
         this.secretaryService = secretaryService;
     }
 
-    @PostMapping
+    @PostMapping("create")
     public Secretary createSecretary(@RequestBody Secretary secretary)
     {
         return secretaryService.save(secretary);
@@ -35,13 +33,13 @@ public class SecretaryController {
         return secretaryService.get(id);
     }
 
-    @DeleteMapping
+    @DeleteMapping("delete/{id}")
     public boolean deleteSecretary(@RequestParam("id") String id)
     {
         return secretaryService.delete(id);
     }
 
-    @GetMapping
+    @GetMapping("get-all")
     public List<Secretary> listAllSecretaries()
     {
         return secretaryService.listSecretaries();

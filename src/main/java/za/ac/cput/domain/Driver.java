@@ -1,44 +1,116 @@
 package za.ac.cput.domain;
 
 import com.sun.istack.NotNull;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.Objects;
 
 /*
     Driver.java
-    Entity for driver
-    Student name: Nonzwakazi Mgxaji
+    Entity for Driver
+    Author: Nonzwakazi Mgxaji
     Student number: 213181584
     Date: 4 August 2022
 */
 
 @Entity
-@Getter
-@ToString
-@Builder
-@NoArgsConstructor
 @Table(name = "tbl_driver")
-public class Driver {
+public class Driver implements Serializable {
+
     @Id
     private String driverID;
-
     @NotNull
     private String driverFirstName;
-
     private String driverLastName;
 
-    private int driverLicenseNum;
+    private String driverLicenseNum;
 
-    public Driver(String driverID, String driverFirstName, String driverLastName, int driverLicenseNum){
-        this.driverID = driverID;
-        this.driverFirstName = driverFirstName;
-        this.driverLastName = driverLastName;
-        this.driverLicenseNum = driverLicenseNum;
+    public Driver(Builder builder) {
+        this.driverID = builder.driverID;
+        this.driverFirstName = builder.driverFirstName;
+        this.driverLastName = builder.driverLastName;
+        this.driverLicenseNum = builder.driverLicenseNum;
+    }
+
+    public Driver() {
+    }
+
+    public String getDriverID() {
+        return driverID;
+    }
+
+    public String getDriverFirstName() {
+        return driverFirstName;
+    }
+
+    public String getDriverLastName() {
+        return driverLastName;
+    }
+
+    public String getDriverLicenseNum() {
+        return driverLicenseNum;
+    }
+
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "driverID='" + driverID + '\'' +
+                ", driverFirstName='" + driverFirstName + '\'' +
+                ", driverLastName='" + driverLastName + '\'' +
+                ", driverLicenseNum='" + driverLicenseNum + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Driver driver = (Driver) o;
+        return driverID.equals(driver.driverID) && driverFirstName.equals(driver.driverFirstName) && driverLastName.equals(driver.driverLastName) && driverLicenseNum.equals(driver.driverLicenseNum);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(driverID, driverFirstName, driverLastName, driverLicenseNum);
+    }
+
+    public static class Builder {
+        private String driverID, driverFirstName, driverLastName, driverLicenseNum;
+
+        public Builder driverID(String driverID) {
+            this.driverID = driverID;
+            return this;
+        }
+
+        public Builder driverFirstName(String driverFirstName) {
+            this.driverFirstName = driverFirstName;
+            return this;
+        }
+
+        public Builder driverLastName(String driverLastName) {
+            this.driverLastName = driverLastName;
+            return this;
+        }
+
+        public Builder driverLicenseNum(String driverLicenseNum) {
+            this.driverLicenseNum = driverLicenseNum;
+            return this;
+        }
+
+        public Builder copy(Driver driver) {
+            this.driverID = driver.driverID;
+            this.driverFirstName = driver.driverFirstName;
+            this.driverLastName = driver.driverLastName;
+            this.driverLicenseNum = driver.driverLicenseNum;
+            return this;
+        }
+
+        public Driver build() {
+            return new Driver(this);
+        }
     }
 }
+
+

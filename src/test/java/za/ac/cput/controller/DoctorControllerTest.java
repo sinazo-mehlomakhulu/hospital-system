@@ -1,19 +1,13 @@
 package za.ac.cput.controller;
 
-import org.apache.coyote.Response;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
-import org.springframework.web.client.RestTemplate;
 import za.ac.cput.domain.Doctor;
 import za.ac.cput.service.impl.DoctorService;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -68,7 +62,6 @@ public class DoctorControllerTest {
                 .withBasicAuth("user", "user123")
                 .getForEntity(url, Doctor[].class);
         assertSame(HttpStatus.OK, response.getStatusCode());
-        //assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertEquals(17, response.getBody().length));
     }
 
 }

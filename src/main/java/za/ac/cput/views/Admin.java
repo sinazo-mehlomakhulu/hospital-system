@@ -1,4 +1,5 @@
 package za.ac.cput.views;
 
-public class login {
+public class Admin {
+
 }
