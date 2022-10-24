@@ -37,11 +37,9 @@ public class User extends JFrame {
         userArea.setBounds(20, 120, 390, 300);
         sp = new JScrollPane(userArea);
 
-
         userPanel.add(entityLabel);
         userPanel.add(comboBox);
         userPanel.add(userArea);
-
         userFrame.setVisible(true);
     }
 
