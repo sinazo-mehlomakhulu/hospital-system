@@ -44,9 +44,9 @@ class SupplierControllerTest {
         this.baseUrl = "http://localhost:" + this.port +"/supplier/";
     }
 
-    @Disabled
+
     @Test
-    void a_save() {
+    public void a_save() {
         String url = baseUrl + "save/";
         System.out.println(url);
         ResponseEntity<Supplier> response = this.restTemplate
