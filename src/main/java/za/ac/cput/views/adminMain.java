@@ -311,24 +311,23 @@ public class adminMain {
                     @Override
                     public void actionPerformed(ActionEvent ae)
                     {
-                        String fname = JOptionPane.showInputDialog("Please enter the patient's first name.");
-                        String lname = JOptionPane.showInputDialog("Please enter the patient's last name.");
-                        String address = JOptionPane.showInputDialog("Please enter the patient's address.");
-                        String cell = JOptionPane.showInputDialog("Please enter the patient's cell number,");
+                        String type = JOptionPane.showInputDialog("Please enter the invoice type.");
+                        String date = JOptionPane.showInputDialog("Please enter the invoice date.");
+                        String amount = JOptionPane.showInputDialog("Please enter the invoice amount.");
                     }
                 });
                 readByIdButton.addActionListener(new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent ae)
                     {
-                        String patientId = JOptionPane.showInputDialog("Please enter the id of the patient you're looking for.");
+                        String invoiceNum = JOptionPane.showInputDialog("Please enter the invoice number.");
                     }
                 });
                 deleteButton.addActionListener(new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent ae)
                     {
-                        String invoiceId = JOptionPane.showInputDialog("Please enter the id of the patient you would like to delete.");
+                        String invoiceNum = JOptionPane.showInputDialog("Please enter the invoice number you would like to delete.");
                     }
                 });
                 readAllButton.addActionListener(new ActionListener(){
@@ -340,10 +339,98 @@ public class adminMain {
                 });
                 break;
             case 9://medicine
+                createButton.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        String amount = JOptionPane.showInputDialog("Please enter the amount for this medicine.");
+                        String type = JOptionPane.showInputDialog("What type of medicine is this?.");
+                    }
+                });
+                readByIdButton.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        String medicineId = JOptionPane.showInputDialog("Please enter the ID of the medicine you would like to find.");
+                    }
+                });
+                deleteButton.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        String medicineNum = JOptionPane.showInputDialog("Please enter the medicine ID you would like to delete.");
+                    }
+                });
+                readAllButton.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        //read all code goes here
+                    }
+                });
                 break;
             case 10://driver
+                createButton.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        String fname = JOptionPane.showInputDialog("Please enter the driver's first name.");
+                        String lname = JOptionPane.showInputDialog("Please enter the driver's last name.");
+                        String licenseNum = JOptionPane.showInputDialog("Please enter the license number.");
+                    }
+                });
+                readByIdButton.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        String driverID = JOptionPane.showInputDialog("Please enter the ID of the driver.");
+                    }
+                });
+                deleteButton.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        String driverID = JOptionPane.showInputDialog("Please enter the ID of the driver you would like to delete.");
+                    }
+                });
+                readAllButton.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        //read all code goes here
+                    }
+                });
                 break;
             case 11://supplier
+                createButton.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        String address = JOptionPane.showInputDialog("Please enter the supplier's address.");
+                        String regNum = JOptionPane.showInputDialog("Please enter the supplier's registration number.");
+                    }
+                });
+                readByIdButton.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        String supplier = JOptionPane.showInputDialog("Please enter the ID of the supplier.");
+                    }
+                });
+                deleteButton.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        String supplierID = JOptionPane.showInputDialog("Please enter the ID of the supplier you would like to delete.");
+                    }
+                });
+                readAllButton.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent ae)
+                    {
+                        //read all code goes here
+                    }
+                });
                 break;
         }
 
