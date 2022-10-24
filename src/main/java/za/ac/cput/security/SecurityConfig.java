@@ -19,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     public BCryptPasswordEncoder encoder(){
-        //Encodes our passwords for a more secure login system
+        //Encodes our passwords for a more secure Login system
         return new BCryptPasswordEncoder();
     }
 
