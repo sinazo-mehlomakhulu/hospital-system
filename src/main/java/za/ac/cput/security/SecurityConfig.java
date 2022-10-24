@@ -62,6 +62,18 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/hospital-system/doctor/get-all").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.DELETE, "/hospital-system/doctor/delete/{id}").hasRole("ADMIN")
 
+                //Path matcher  for Invoice
+                .antMatchers(HttpMethod.POST, "/hospital-system/invoice/save").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/hospital-system/invoice/read/{id}").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/hospital-system/invoice/find-all").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.DELETE, "/hospital-system/invoice/delete/{id}").hasRole("ADMIN")
+
+                //Path matcher  for medicalAid
+                .antMatchers(HttpMethod.POST, "/hospital-system/medicalaid/save").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/hospital-system/medicalaid/read/{id}").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/hospital-system/medicalaid/find-all").hasAnyRole("ADMIN", "USER")
+                .antMatchers(HttpMethod.DELETE, "/hospital-system/medicalaid/delete/{id}").hasRole("ADMIN")
+
                 //Path matcher for Secretary
                 .antMatchers(HttpMethod.POST, "/hospital-system/secretary/create").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/hospital-system/secretary/read/{id}").hasRole("ADMIN")
