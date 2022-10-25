@@ -19,7 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     public BCryptPasswordEncoder encoder(){
-        //Encodes our passwords for a more secure Login system
+        //Encodes our passwords for a more secure login system
         return new BCryptPasswordEncoder();
     }
 
@@ -53,6 +53,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .antMatchers(HttpMethod.POST, "/**/hospitalroom/save").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/**/hospitalroom/delete/{id}").hasRole("ADMIN")
+                //changed this because only the admin should read specific IDs
                 .antMatchers(HttpMethod.GET, "/**/hospitalroom/read/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/**/hospitalroom/find-all").hasAnyRole("USER","ADMIN")
 
@@ -62,41 +63,24 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET, "/hospital-system/doctor/get-all").hasAnyRole("ADMIN", "USER")
                 .antMatchers(HttpMethod.DELETE, "/hospital-system/doctor/delete/{id}").hasRole("ADMIN")
 
-                //Path matcher  for Invoice
-                .antMatchers(HttpMethod.POST, "/hospital-system/invoice/save").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/hospital-system/invoice/read/{id}").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/hospital-system/invoice/find-all").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.DELETE, "/hospital-system/invoice/delete/{id}").hasRole("ADMIN")
+             //Path matcher for cleaningstaff
+            .antMatchers(HttpMethod.POST, "/hospital-system/cleaningStaff/save").hasRole("ADMIN")
+            .antMatchers(HttpMethod.GET, "/hospital-system/cleaningStaff/read/{id}").hasRole("ADMIN")
+            .antMatchers(HttpMethod.GET, "/hospital-system/cleaningStaff/find-All").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.DELETE, "/hospital-system/cleaningStaff/delete/{id}").hasRole("ADMIN")
 
-                //Path matcher  for medicalAid
-                .antMatchers(HttpMethod.POST, "/hospital-system/medicalaid/save").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/hospital-system/medicalaid/read/{id}").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/hospital-system/medicalaid/find-all").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.DELETE, "/hospital-system/medicalaid/delete/{id}").hasRole("ADMIN")
-
-                //Path matcher for Secretary
-                .antMatchers(HttpMethod.POST, "/hospital-system/secretary/create").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/hospital-system/secretary/read/{id}").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/hospital-system/secretary/get-all").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.DELETE, "/hospital-system/secretary/delete/{id}").hasRole("ADMIN")
-
-                 //Path matcher for cleaningstaff
-                .antMatchers(HttpMethod.POST, "/hospital-system/cleaningStaff/save").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/hospital-system/cleaningStaff/read/{id}").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/hospital-system/cleaningStaff/find-All").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.DELETE, "/hospital-system/cleaningStaff/delete/{id}").hasRole("ADMIN")
-
-                //Path matcher for appointment
-                .antMatchers(HttpMethod.POST, "/hospital-system/appointment/save").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/hospital-system/appointment/read/{id}").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/hospital-system/appointment/find-all").hasAnyRole("ADMIN", "USER")
-                .antMatchers(HttpMethod.DELETE, "/hospital-system/appointment/delete/{id}").hasRole("ADMIN")
+            //Path matcher for appointment
+            .antMatchers(HttpMethod.POST, "/hospital-system/appointment/save").hasRole("ADMIN")
+            .antMatchers(HttpMethod.GET, "/hospital-system/appointment/read/{id}").hasRole("ADMIN")
+            .antMatchers(HttpMethod.GET, "/hospital-system/appointment/find-all").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.DELETE, "/hospital-system/appointment/delete/{id}").hasRole("ADMIN")
 
                 //Path matcher For the Nurse System
                 .antMatchers(HttpMethod.POST, "/**/nurse/save").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/**/nurse/delete/{id}").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/**/nurse/read/{id}").hasAnyRole("USER","ADMIN")
                 .antMatchers(HttpMethod.GET, "/**/nurse/find-all").hasAnyRole("USER","ADMIN")
+
 
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return httpSecurity.build();

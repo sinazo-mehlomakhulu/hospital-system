@@ -1,0 +1,86 @@
+package za.ac.cput.controller;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import za.ac.cput.domain.Patient;
+import za.ac.cput.factory.PatientFactory;
+import za.ac.cput.service.PatientService;
+
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.*;
+@TestMethodOrder(MethodOrderer.MethodName.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+class PatientControllerTest {
+
+    public static String SECURITY_USERNAME = "user";
+    public static String SECURITY_PASSWORD = "password";
+
+    private String baseUrl;
+    @LocalServerPort
+    private int port;
+    @Autowired
+    private TestRestTemplate restTemplate;
+    @Autowired
+    private PatientController controller;
+    @Autowired
+    private PatientService patientService;
+
+    private Patient patient;
+
+    @BeforeEach
+    void setUp() {
+        assertNotNull(controller);
+        this.patient = PatientFactory.createPatient("389887","Tom","Davis","23 Street","089775536");
+        this.patientService.save(patient);
+        this.baseUrl = "http://localhost:" + this.port + "/hospital system/patient/";
+    }
+
+    @Test
+    void a_save() {
+        String url = baseUrl + "save";
+        System.out.println(url);
+        ResponseEntity<Patient> response = this.restTemplate
+                .withBasicAuth("admin-user","65ff7492d30")
+                .postForEntity(url, this.patient,Patient.class);
+        System.out.println(response);
+        assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertNotNull(response.getBody()));
+    }
+
+    @Test
+    void b_read() {
+        String url = baseUrl + "read/" + this.patient.getPatIdNum();
+        System.out.println(url);
+        ResponseEntity<Patient> response = this.restTemplate
+                .withBasicAuth("admin-user","65ff7492d30")
+                .getForEntity(url, Patient.class);
+        System.out.println(response);
+        assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertNotNull(response.getBody()));
+    }
+
+    @Test
+    void c_delete() {
+        String url = baseUrl + "delete/" + this.patient.getPatIdNum();
+        System.out.println(url);
+        this.restTemplate.delete(url);
+    }
+
+    @Test
+    void d_getAll() {
+        String url = baseUrl + "find-all";
+        System.out.println(url);
+        ResponseEntity<Patient[]> response = this.restTemplate
+                .withBasicAuth("admin-user", "65ff7492d30")
+                .getForEntity(url, Patient[].class);
+        System.out.println(Arrays.asList(response.getBody()));
+        assertAll(() -> assertEquals(HttpStatus.OK, response.getStatusCode()), () -> assertEquals(21, response.getBody().length));
+    }
+}
