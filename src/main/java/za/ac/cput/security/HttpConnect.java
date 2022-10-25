@@ -1,9 +1,6 @@
 package za.ac.cput.security;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -18,15 +15,10 @@ public class HttpConnect {
             connect.setRequestMethod("POST");
             connect.setRequestProperty("Content-Type",
                     "application/json");
-            //connect.setRequestProperty("custom-Header", "XYZ");
+            connect.setRequestProperty("Accept", "application/json");
 
-            connect.setRequestProperty("Content-Length", "" +
-                    Integer.toString(urlParam.getBytes().length));
-            connect.setRequestProperty("Content-Language", "en-US");
-
-            connect.setUseCaches (false);
-            connect.setDoInput(true);
             connect.setDoOutput(true);
+            connect.setDoInput(true);
 
             //Send request
             DataOutputStream wr = new DataOutputStream(
@@ -34,6 +26,8 @@ public class HttpConnect {
             wr.writeBytes (urlParam);
             wr.flush ();
             wr.close ();
+
+
 
             //Get Response
             InputStream is = connect.getInputStream();
