@@ -9,8 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileWriter;
-import java.io.IOException;
+import za.ac.cput.util.StringHelper;
 
 public class adminMain {
 
@@ -66,19 +65,28 @@ public class adminMain {
             case 0:
                 createButton.addActionListener(new ActionListener(){
 
-                    public JSONObject prepJson(String str1)
+                    public JSONObject prepJson(String str1, String str2, String str3)
                     {
                         JSONObject jObject = new JSONObject();
-                        jObject.put("nurse", str1);
+                        jObject.put("nurseID", str1);
+                        jObject.put("nurseFirstName", str2);
+                        jObject.put("nurseLastName", str3);
                         return jObject;
                     }
+
                     @Override
                     public void actionPerformed(ActionEvent ae)
                     {
+                        String id = "";
                         String fname = JOptionPane.showInputDialog("Please enter the nurse's first name");
                         String lname = JOptionPane.showInputDialog("Please enter the nurse's last name");
 
-                        JSONObject sendObj = prepJson("");
+//                        String json = "{"+"nurseID"+":"+"'"+id+"'"+","
+//                            +"nurseFirstName"+":"+"'"+fname+"'"+","
+//                            +"nurseLastName"+":"+"'"+lname+"'"+"}";
+//                        System.out.println(json);
+
+                        JSONObject sendObj = prepJson(id, fname, lname);
                         String reqString = sendObj.toString();
                         String url=  "http://localhost:8080/hospital system/nurse";
 
