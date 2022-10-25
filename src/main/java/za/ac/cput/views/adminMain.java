@@ -1,34 +1,42 @@
 package za.ac.cput.views;
 
+import netscape.javascript.JSObject;
+import org.aspectj.apache.bcel.classfile.Utility;
+import org.json.JSONObject;
+import za.ac.cput.security.HttpConnect;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class adminMain {
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("Administrator - Hospital Management");
-        Font f1  = new Font(Font.SANS_SERIF, Font.PLAIN,  17);
-        Font  f2  = new Font(Font.SANS_SERIF, Font.PLAIN,  10);
 
-        JComboBox menuComboBox = new JComboBox();
-        String departments[] =
-                {
-                        "Nurse", "Cleaning Staff",
-                        "Room", "Patient", "Medical Aid", "Doctor",
-                        "Appointment", "Secretary", "Invoice", "Medicine",
-                        "Driver", "Supplier"
-                };
+    JFrame frame = new JFrame("Administrator - Hospital Management");
+    JComboBox menuComboBox = new JComboBox();
+    String departments[] =
+            {
+                    "Nurse", "Cleaning Staff",
+                    "Room", "Patient", "Medical Aid", "Doctor",
+                    "Appointment", "Secretary", "Invoice", "Medicine",
+                    "Driver", "Supplier"
+            };
+
+
+    JButton createButton = new JButton("create");
+    JButton deleteButton = new JButton("delete");
+    JButton readAllButton = new JButton("read all");
+    JButton readByIdButton = new JButton("read by id");
+
+    public void showGUI()
+    {
         for(String item : departments)
         {
             menuComboBox.addItem(item);
         }
         menuComboBox.setBounds(270, 20, 150, 30);
-
-        JButton createButton = new JButton("create");
-        JButton deleteButton = new JButton("delete");
-        JButton readAllButton = new JButton("read all");
-        JButton readByIdButton = new JButton("read by id");
 
         createButton.setBounds(50, 150, 100, 20);
         deleteButton.setBounds(550, 150, 100, 20);
@@ -57,11 +65,24 @@ public class adminMain {
         {
             case 0:
                 createButton.addActionListener(new ActionListener(){
+
+                    public JSONObject prepJson(String str1)
+                    {
+                        JSONObject jObject = new JSONObject();
+                        jObject.put("nurse", str1);
+                        return jObject;
+                    }
                     @Override
                     public void actionPerformed(ActionEvent ae)
                     {
                         String fname = JOptionPane.showInputDialog("Please enter the nurse's first name");
                         String lname = JOptionPane.showInputDialog("Please enter the nurse's last name");
+
+                        JSONObject sendObj = prepJson("");
+                        String reqString = sendObj.toString();
+                        String url=  "http://localhost:8080/hospital system/nurse";
+
+                        String response=  HttpConnect.post(url, reqString);
                     }
                 });
                 readByIdButton.addActionListener(new ActionListener(){
@@ -436,4 +457,5 @@ public class adminMain {
 
         frame.setVisible(true);
     }
+
 }

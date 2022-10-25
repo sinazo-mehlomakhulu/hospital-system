@@ -13,7 +13,7 @@ public class User extends JFrame {
     private static JComboBox<? extends String> comboBox;
 
   public void setGUI(){
-        userFrame = new JFrame("Hospital Management - Client");
+        userFrame = new JFrame("Client - Hospital Management");
         userPanel = new JPanel();
 
         userFrame.setSize(450, 500);
