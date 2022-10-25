@@ -7,9 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import za.ac.cput.domain.CleaningStaff;
+import za.ac.cput.domain.Driver;
 import za.ac.cput.domain.HospitalRoom;
 import za.ac.cput.service.CleaningStaffService;
+import za.ac.cput.service.impl.CleaningStaffServiceImpl;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -20,13 +23,13 @@ Sinazo Mehlomkhulu (216076498)
 Date : 11 October 2022
  */
 @RestController
-@RequestMapping(path  = "hospital-system/cleaningStaff")
+@RequestMapping(path  = "/cleaningStaff/")
 @Slf4j
 public class CleaningStaffController {
-    private final CleaningStaffService service;
+    private CleaningStaffServiceImpl service;
 
     @Autowired
-    public CleaningStaffController(CleaningStaffService service) {
+    public CleaningStaffController(CleaningStaffServiceImpl service) {
         this.service = service;
     }
 
@@ -43,16 +46,19 @@ public class CleaningStaffController {
         return ResponseEntity.ok(cleaningStaff);
     }
 
-    @DeleteMapping("delete/{id}")
-    public boolean delete(@RequestParam("id") String id) {
+    @DeleteMapping("/delete/{id}")
+    public boolean delete(@PathVariable String id) {
         return service.delete(id);
     }
 
-    @GetMapping("find-all")
-    public ResponseEntity<Set<CleaningStaff>> getAll() {
-        Set<CleaningStaff> cleaningStaffList = this.service.getAll();
-        return ResponseEntity.ok(cleaningStaffList);
+    @GetMapping("/find/{id}")
+    public CleaningStaff find(@PathVariable String id){
+        return service.findById(id);
     }
+
+    @GetMapping("/all")
+    public List<CleaningStaff> getAll(){return this.service.getAll();}
+
 }
 
 

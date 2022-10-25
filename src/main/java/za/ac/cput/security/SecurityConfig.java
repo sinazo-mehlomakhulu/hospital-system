@@ -64,16 +64,18 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.DELETE, "/hospital-system/doctor/delete/{id}").hasRole("ADMIN")
 
              //Path matcher for cleaningstaff
-            .antMatchers(HttpMethod.POST, "/hospital-system/cleaningStaff/save").hasRole("ADMIN")
-            .antMatchers(HttpMethod.GET, "/hospital-system/cleaningStaff/read/{id}").hasRole("ADMIN")
-            .antMatchers(HttpMethod.GET, "/hospital-system/cleaningStaff/find-All").hasAnyRole("ADMIN", "USER")
-            .antMatchers(HttpMethod.DELETE, "/hospital-system/cleaningStaff/delete/{id}").hasRole("ADMIN")
+            .antMatchers(HttpMethod.POST, "/cleaningStaff/save").hasRole("ADMIN")
+            .antMatchers(HttpMethod.GET, "/cleaningStaff/read/{id}").hasRole("ADMIN")
+            .antMatchers(HttpMethod.GET, "/cleaningStaff/find/{id}").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.DELETE, "/cleaningStaff/delete/{id}").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/cleaningStaff/all").hasRole("ADMIN")
 
             //Path matcher for appointment
-            .antMatchers(HttpMethod.POST, "/hospital-system/appointment/save").hasRole("ADMIN")
-            .antMatchers(HttpMethod.GET, "/hospital-system/appointment/read/{id}").hasRole("ADMIN")
-            .antMatchers(HttpMethod.GET, "/hospital-system/appointment/find-all").hasAnyRole("ADMIN", "USER")
-            .antMatchers(HttpMethod.DELETE, "/hospital-system/appointment/delete/{id}").hasRole("ADMIN")
+            .antMatchers(HttpMethod.GET, "/appointment/find/{id}").hasRole("ADMIN")
+            .antMatchers(HttpMethod.POST, "/appointment/save").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/appointment/read/{id}").hasRole("ADMIN")
+            .antMatchers(HttpMethod.DELETE, "/appointment/delete/{id}").hasAnyRole("ADMIN", "USER")
+            .antMatchers(HttpMethod.GET, "/appointment/all").hasRole("ADMIN")
 
                 //Path matcher For the Nurse System
                 .antMatchers(HttpMethod.POST, "/**/nurse/save").hasRole("ADMIN")
