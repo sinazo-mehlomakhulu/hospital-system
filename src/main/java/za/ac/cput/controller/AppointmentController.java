@@ -1,15 +1,11 @@
 package za.ac.cput.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import za.ac.cput.domain.Appointment;
-import za.ac.cput.domain.Doctor;
-import za.ac.cput.service.AppointmentService;
+import za.ac.cput.service.impl.AppointmentServiceImpl;
+import java.util.List;
 
-import java.util.Set;
 
 
 /*
@@ -19,37 +15,36 @@ import java.util.Set;
  13/10/2022
  */
 @RestController
-@RequestMapping(path  = "hospital-system/appointment")
+@RequestMapping(path  = "/appointment")
 @Slf4j
 public class AppointmentController {
-    private static AppointmentService appointmentService;
-
+    private AppointmentServiceImpl service;
     @Autowired
-    public AppointmentController(AppointmentService appointmentService) {
-        this.appointmentService = appointmentService;
+    public AppointmentController(AppointmentServiceImpl service){
+        this.service = service;
     }
 
-    @PostMapping("save")
-    public Appointment createAppointment(@RequestBody Appointment appointment) {
-        return appointmentService.save(appointment);
 
+    @GetMapping("/find/{id}")
+    public Appointment find(@PathVariable String id){
+        return service.findById(id);
     }
 
-    @GetMapping("read/{id}")
-    public ResponseEntity<Appointment> read(@PathVariable String id) {
-        log.info("Read request: {}", id);
-        Appointment appointment = this.appointmentService.read(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        return ResponseEntity.ok(appointment);
+    @PostMapping("/save")
+    public Appointment save(@RequestBody Appointment appointment){
+        return service.save(appointment);
     }
 
-    @DeleteMapping("delete/{id}")
-    public boolean delete(@RequestParam("id") String id) {
-        return appointmentService.delete(id);
+    //Delete method
+    @DeleteMapping("/delete/{id}")
+    public boolean delete(@PathVariable String id){
+        return service.delete(id);
     }
 
-    @GetMapping("get-all")
-    public ResponseEntity<Set<Appointment>> getAll() {
-        Set<Appointment> appointment = this.appointmentService.getAll();
-        return ResponseEntity.ok(appointment);
-    }
+    @GetMapping("/all")
+    public List<Appointment> getAll(){return this.service.getAll();}
+
+
+
+
 }

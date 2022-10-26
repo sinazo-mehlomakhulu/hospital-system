@@ -39,7 +39,9 @@ public class Appointment implements Serializable {
         this.appointmentTime =appointmentTime;
     }
 
+    public Appointment() {
 
+    }
 
 
     public String getAppointmentId() {
